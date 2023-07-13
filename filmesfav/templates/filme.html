@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+  <title>{{ filme.titulo }}</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ filme.titulo }}</h1>
+  <p>
+    {{ filme.data }} - Direção: <a href="{% url 'sobre-diretor' filme.diretor.pk %}">{{ filme.diretor }}</a>
+  </p>
+  <h2>Sinopse</h2>
+    <ul>
+      {{ filme.sinopse }}
+    </ul>
+  <h2>Elenco</h2>
+    <ul>
+      {% for ator in filme.elenco.all %}
+        <li><a href="{{ ator.buscar_url }}">{{ ator.nome }}</a></li>
+      {% endfor %}
+  </ul>
+{% endblock %}

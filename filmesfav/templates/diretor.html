@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+  <title>{{ diretor.nome }}</title>
+{% endblock %}
+
+{% block content %}
+  <h1>{{ diretor.nome }}</h1>
+  <h2>Informações</h2>
+    <ul>
+      <li><strong>Nascimento:</strong> {{ diretor.nascimento }}{% if diretor.falecimento %} - <strong>Morte:</strong> {{ diretor.falecimento }}{% endif %}</li>
+      <li><strong>Identidade de Gênero:</strong> {{ genero }}</li>
+      <li><strong>País:</strong> {{ diretor.nacionalidade }}
+      </li>
+    </ul>
+  <h2>Filmes</h2>
+    <ul>
+      {% for filme in diretor.filme_set.all %}
+        <li><a href="{% url 'sobre-filme' filme.pk %}">{{ filme.titulo }}</a></li>
+      {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+  <h1>Filmes favoritos</h1>
+  <p>
+    Bem vindo ao meu site com a lista dos meus filmes favoritos!
+  </p>
+  <h2><strong>Filmes:</strong></h2>
+  {% for filme in filmes %}
+  <h3><strong>Titulo:</strong> <a href="{{ filme.buscar_url }}">{{ filme.titulo }} ({{ filme.data.year }})</a></h3>
+    <ul>
+      <li><strong>Estreia:</strong> {{ filme.data }}</li>
+      <li><strong>Direção:</strong> <a href="{% url 'sobre-diretor' filme.diretor.pk %}">{{ filme.diretor }}</a></li>
+      <li><strong>Elenco:</strong>
+        {% for ator in filme.elenco.all %}
+          <a href="{{ ator.buscar_url }}">{{ ator.nome }}</a> /
+        {% endfor %}
+      </li>
+    </ul>
+  {% endfor %}
+{% endblock %}
